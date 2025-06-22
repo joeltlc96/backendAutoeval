@@ -3,7 +3,8 @@ import { PORT } from './config.js'
 import morgan from 'morgan'
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
-import preguntaRoutes from './routes/pregunta.route.js' // 👈 AGREGADO
+import preguntaRoutes from './routes/pregunta.route.js'
+import historialRoutes from './routes/historial.route.js'
 import { logSpecificRequest } from './middlewares/loggerMiddleware.js'
 import { VerificarToken } from './middlewares/authMiddleware.js'
 import cookieParser from 'cookie-parser'
@@ -26,7 +27,8 @@ app.use('/api/users', VerificarToken, userRouter)
 
 //  Rutas públicas
 app.use('/api/auth', authRouter)
-app.use('/api', preguntaRoutes) // 👈 AQUÍ CONECTAS TODO
+app.use('/api', preguntaRoutes)
+app.use('/api', historialRoutes)
 
 // Ruta de prueba
 app.get('/', logSpecificRequest, (req, res) => {

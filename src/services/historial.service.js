@@ -1,9 +1,9 @@
 const memoria = []
 
-export const guardarHistorial = ({ pregunta, respuesta }) => {
+export const guardarHistorialService = ({ pregunta, respuesta }) => {
   memoria.push({ pregunta, respuesta })
 }
 
-export const obtenerHistorial = () => {
+export const obtenerHistorialService = () => {
   return memoria
 }

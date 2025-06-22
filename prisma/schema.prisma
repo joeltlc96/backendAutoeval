@@ -35,3 +35,11 @@ model Task {
 
   @@map("tasks")
 }
+
+model Historial {
+  id        Int      @id @default(autoincrement())
+  pregunta  String
+  respuesta String
+  resultado String
+  createdAt DateTime @default(now())
+}
