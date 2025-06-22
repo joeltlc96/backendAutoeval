@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
 import { prisma } from '../db.js'
-import { validatePassword } from '../tools/security.js'
+import { encryptPassword, validatePassword } from '../tools/security.js'
 import { PRIVATE_KEY } from '../config.js'
 
 // ✅ REGISTRO
@@ -18,7 +17,7 @@ const register = async (req, res) => {
       return res.status(400).json({ mensaje: 'Ya existe un usuario con ese correo' })
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10)
+    const hashedPassword = await encryptPassword(password)
 
     const nuevoUsuario = await prisma.user.create({
       data: {
