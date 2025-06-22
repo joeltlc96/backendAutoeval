@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { prisma } from '../db.js'
-import { validatePassword } from '../tools/secutity.js'
+import { validatePassword } from '../tools/security.js'
 import { PRIVATE_KEY } from '../config.js'
 
 // ✅ REGISTRO
