@@ -1,6 +1,6 @@
 import cache from '../cache.js'
 import { prisma } from '../db.js'
-import { encryptPassword } from '../tools/secutity.js'
+import { encryptPassword } from '../tools/security.js'
 
 export const getUsers = async (req, res) => {
   console.log(`Petición hecha por ${req.session.user}`)
