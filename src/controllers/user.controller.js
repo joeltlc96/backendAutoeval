@@ -15,8 +15,13 @@ export const getUsers = async (req, res) => {
 
   console.log('Consulta desde la base de datos')
   const users = await prisma.user.findMany({
-    omit: {
-      password: true
+    select: {
+      id: true,
+      username: true,
+      name: true,
+      email: true,
+      isActive: true,
+      createdAt: true
     }
   })
   cache.set(cacheKeyAllUsers, users)
@@ -26,7 +31,14 @@ export const getUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: Number(req.params.id) },
-    omit: { password: true }
+    select: {
+      id: true,
+      username: true,
+      name: true,
+      email: true,
+      isActive: true,
+      createdAt: true
+    }
   })
 
   if (!user) {
@@ -53,9 +65,10 @@ export const createUser = async (req, res) => {
   newUser.password = hashPassword
 
   const createdUser = await prisma.user.create({
-    data: newUser,
-    omit: { password: true }
+    data: newUser
   })
 
-  res.json(createdUser)
+  const { password: _, ...userData } = createdUser
+
+  res.json(userData)
 }
