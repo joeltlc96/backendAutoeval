@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken'
 import { prisma } from '../db.js'
-import { validatePassword } from '../tools/secutity.js'
+import { encryptPassword, validatePassword } from '../tools/security.js'
 import { PRIVATE_KEY } from '../config.js'
 
-// ✅ REGISTRO
-const register = async (req, res) => {
+// REGISTRO
+export const register = async (req, res) => {
   try {
     const { username, name, email, password } = req.body
 
@@ -47,17 +47,15 @@ const register = async (req, res) => {
   }
 }
 
-// ✅ LOGIN
-const login = async (req, res) => {
+// LOGIN
+export const login = async (req, res) => {
   const { username, password } = req.body
 
   if (!username || !password) {
     return res.status(400).json({ mensaje: 'Username y password son requeridos' })
   }
 
-  const user = await prisma.user.findUnique({
-    where: { username }
-  })
+  const user = await prisma.user.findUnique({ where: { username } })
 
   if (!user) {
     return res.status(400).json({ mensaje: 'Usuario no encontrado' })
@@ -78,10 +76,7 @@ const login = async (req, res) => {
   }).json({ user: userData, token })
 }
 
-// ✅ LOGOUT
-const logout = (req, res) => {
+// LOGOUT
+export const logout = (req, res) => {
   res.clearCookie('access_token').end()
 }
-
-// ✅ EXPORTA TODO
-export { register, login, logout }
