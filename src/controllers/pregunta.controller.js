@@ -1,24 +1,12 @@
-import { generarPreguntaDesdeOpenAI } from '../services/openai.service.js'
-import { guardarHistorialService } from '../services/historial.service.js'
-
+// src/controllers/pregunta.controller.js
 export const generarPregunta = async (req, res) => {
-  try {
-    const { tema } = req.body
+  const { tema } = req.body
 
-    if (!tema) {
-      return res.status(400).json({ mensaje: 'Tema es requerido' })
-    }
-
-    const pregunta = await generarPreguntaDesdeOpenAI(tema)
-
-    guardarHistorialService({
-      pregunta,
-      respuesta: null // aún no respondida
-    })
-
-    res.status(200).json({ pregunta })
-  } catch (error) {
-    console.error('Error al generar pregunta:', error)
-    res.status(500).json({ mensaje: 'Error al generar pregunta' })
+  if (!tema) {
+    return res.status(400).json({ error: 'El tema es requerido' })
   }
+
+  // Simulación de generación de pregunta
+  const pregunta = `¿Qué sabes sobre el tema "${tema}"?`
+  res.json({ pregunta })
 }

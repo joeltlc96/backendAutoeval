@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { prisma } from '../db.js'
-import { validatePassword } from '../tools/secutity.js'
+import { encryptPassword, validatePassword } from '../tools/security.js'
 import { PRIVATE_KEY } from '../config.js'
 
 // ✅ REGISTRO

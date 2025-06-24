@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { obtenerHistorialController } from '../controllers/historial.controller.js'
+import { guardarHistorial, obtenerHistorial } from '../controllers/historial.controller.js'
 
 const router = Router()
 
-// ✅ Ruta para obtener el historial de preguntas y respuestas
-router.get('/historial', obtenerHistorialController)
+router.post('/', guardarHistorial)
+router.get('/', obtenerHistorial)
 
 export default router
