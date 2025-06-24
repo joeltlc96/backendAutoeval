@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken'
 import { prisma } from '../db.js'
+<<<<<<< Updated upstream
 import { encryptPassword, validatePassword } from '../tools/security.js'
+=======
+import { encryptPassword, validatePassword } from '../tools/security.js' // ✅ Importaciones corregidas
+>>>>>>> Stashed changes
 import { PRIVATE_KEY } from '../config.js'
 
 // ✅ REGISTRO
